@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="F1.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:tabViews="clr-namespace:F1.Views.TabView"
+    xmlns:views="clr-namespace:F1.Views"
+    BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor},
+                                      Dark={StaticResource DarkPageBackgroundColor}}"
+    Shell.NavBarIsVisible="False">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="TabBar">
+                <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightTabBarBackgroundColor}, Dark={StaticResource DarkTabBarBackgroundColor}}" />
+                <Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource AccentColor}" />
+                <Setter Property="Shell.DisabledColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}" />
+                <Setter Property="Shell.UnselectedColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light={StaticResource LightTabBarBackgroundColor}, Dark={StaticResource DarkTabBarBackgroundColor}}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, Dark={StaticResource DarkPrimaryTextColor}}" />
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource AccentColor}" />
+            </Style>
+
+            <Style BasedOn="{StaticResource BaseStyle}" TargetType="TabBar" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <ShellItem Route="welcome">
+        <ShellContent ContentTemplate="{DataTemplate views:WelcomePage}" />
+    </ShellItem>
+    <TabBar Route="main">
+        <Tab
+            Title="Home"
+            Icon="home.png"
+            Route="home">
+            <ShellContent ContentTemplate="{DataTemplate tabViews:HomeView}" />
+        </Tab>
+        <Tab
+            Title="Schedule"
+            Icon="calendar.png"
+            Route="schedule">
+            <ShellContent ContentTemplate="{DataTemplate tabViews:ScheduleView}" />
+        </Tab>
+        <Tab
+            Title="Drivers"
+            Icon="driver.png"
+            Route="drivers">
+            <ShellContent ContentTemplate="{DataTemplate tabViews:DriversView}" />
+        </Tab>
+    </TabBar>
+</Shell>

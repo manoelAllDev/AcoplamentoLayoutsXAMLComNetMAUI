@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="F1.Views.WelcomePage"
+             Title="WelcomePage">
+
+    <ContentPage.Content>
+        <Grid
+            BackgroundColor="{StaticResource PrimaryColor}"
+            RowDefinitions="Auto, *"
+            RowSpacing="0">
+            <Grid
+                Grid.Row="1"
+                RowDefinitions="*, Auto, Auto"
+                RowSpacing="0">
+                <Image
+                    Grid.Row="0"
+                    Aspect="AspectFill"
+                    Source="welcome.png" />
+                <StackLayout Grid.Row="1" VerticalOptions="End">
+                    <Label Margin="20,10" Text="Welcome to your Formula 1 App">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    Style="{StaticResource Headline3_ExoRegular}"
+                                    Text="Welcome to your&#x0a;"
+                                    TextColor="{StaticResource DarkPrimaryTextColor}" />
+                                <Span
+                                    Style="{StaticResource Headline3_ExoBold}"
+                                    Text="Formula 1 App"
+                                    TextColor="{StaticResource DarkPrimaryTextColor}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Margin="20,10,20,30"
+                        LineHeight="0.85"
+                        Style="{StaticResource Subtitle1FontSize_ExoRegular}"
+                        Text="Drivers | Teams | Results"
+                        TextColor="{StaticResource DarkPrimaryTextColor}" />
+                </StackLayout>
+                <Button
+                    Grid.Row="2"
+                    Margin="15,15,15,30"
+                    Padding="15,20"
+                    BackgroundColor="{StaticResource AccentColor}"
+                    Command="{Binding LetsStartCommand}"
+                    CornerRadius="36"
+                    FontFamily="Exo_Bold"
+                    FontSize="14"
+                    Text="LET'S START"
+                    TextColor="{StaticResource DarkPrimaryTextColor}" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
