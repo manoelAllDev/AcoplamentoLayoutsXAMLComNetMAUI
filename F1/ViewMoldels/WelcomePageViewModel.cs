@@ -11,7 +11,7 @@ namespace F1.ViewMoldels
 
 
         [RelayCommand]
-        private async void LetsStartCommandHandler()
+        private async void LetsStart()
         {
             await Shell.Current.GoToAsync("///main");
         }

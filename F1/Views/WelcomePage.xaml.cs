@@ -1,9 +1,16 @@
+using F1.ViewMoldels;
+
 namespace F1.Views;
 
 public partial class WelcomePage : ContentPage
 {
-	public WelcomePage()
+	private WelcomePageViewModel vm;
+    public WelcomePage()
 	{
-		InitializeComponent();
-	}
+        vm = new WelcomePageViewModel();
+        BindingContext = vm;
+
+        InitializeComponent();
+
+    }
 }
