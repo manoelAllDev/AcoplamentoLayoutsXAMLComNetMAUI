@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Markup;
+using Microsoft.Extensions.Logging;
 
 namespace F1
 {
@@ -8,12 +10,14 @@ namespace F1
         {
             var builder = MauiApp.CreateBuilder();
             builder
-                .UseMauiApp<App>()
+                .UseMauiApp<App>().UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                }).UseMauiCommunityToolkitMarkup();
+
+
 
 #if DEBUG
     		builder.Logging.AddDebug();
