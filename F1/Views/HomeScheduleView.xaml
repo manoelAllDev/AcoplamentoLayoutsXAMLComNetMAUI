@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="F1.Views.HomeScheduleView"
+             x:Name="template"
+             Padding="0,0,0,5">
+    
+    <StackLayout.GestureRecognizers>
+        <TapGestureRecognizer
+         Command="{Binding Parent.BindingContext.SeeEventCommand, Source={x:Reference template}}"
+         CommandParameter="{Binding BindingContext, Source={x:Reference template}}"
+         NumberOfTapsRequired="1" />
+    </StackLayout.GestureRecognizers>
+    <Frame
+     Margin="5,0"
+     Padding="10,5"
+     BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor},
+                                       Dark={StaticResource DarkCardBackgroundColor}}"
+     CornerRadius="20"
+     HeightRequest="85">
+        <Grid
+         Margin="5,0,5,0"
+         ColumnDefinitions="Auto, Auto"
+         RowDefinitions="Auto, Auto, Auto"
+         RowSpacing="3"
+         VerticalOptions="Center">
+            <Image
+             Grid.Row="0"
+             Grid.RowSpan="3"
+             Grid.Column="0"
+             Margin="0,0,5,0"
+             Aspect="AspectFill"
+             HeightRequest="40"
+             HorizontalOptions="Center"
+             Source="{Binding Circuit.Location.Flag}"
+             VerticalOptions="Center"
+             WidthRequest="40">
+                <Image.Clip>
+                    <EllipseGeometry
+                     Center="20,20"
+                     RadiusX="20"
+                     RadiusY="20" />
+                </Image.Clip>
+            </Image>
+            <Label
+             Grid.Row="0"
+             Grid.Column="1"
+             Style="{StaticResource CaptionFontSize_ExoRegular}"
+             Text="{Binding Round, StringFormat='Round {0}'}"
+             TextColor="{StaticResource AccentColor}" />
+            <Label
+             Grid.Row="1"
+             Grid.Column="1"
+             Style="{StaticResource Body1FontSize_ExoBold}"
+             Text="{Binding Circuit.Location.Country}" />
+            <Label
+             Grid.Row="2"
+             Grid.Column="1"
+             Margin="0,1"
+             Style="{StaticResource CaptionFontSize_ExoMedium}"
+             TextColor="{AppThemeBinding Light={StaticResource LightSecondaryTextColor},
+                                         Dark={StaticResource DarkSecondaryTextColor}}">
+                <Label.Text>
+                    <MultiBinding StringFormat="{}{0:dd}-{1:dd MMM yyyy}">
+                        <Binding Path="FirstPractice.Date" />
+                        <Binding Path="Date" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+        </Grid>
+    </Frame>
+</StackLayout>
