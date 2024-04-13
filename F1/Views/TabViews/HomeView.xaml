@@ -5,6 +5,7 @@
              xmlns:templateSelector="clr-namespace:F1.Helpers.TemplateSelectors"
              xmlns:views="clr-namespace:F1.Views"
              xmlns:controls="clr-namespace:F1.Views.Controls"
+             xmlns:nav="clr-namespace:F1.Views.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              NavigationPage.HasNavigationBar="False">
 
@@ -57,26 +58,23 @@
                 Style="{StaticResource Body1FontSize_ExoBold}"
                 Text="Latest results" />
             <StackLayout
-               toolkit:StateContainer.CurrentState="{Binding CurrentState}"
                 Margin="20,0,0,0"
                 HeightRequest="150">
-                
-                <toolkit:StateContainer.StateViews>
 
-                    <StackLayout toolkit:StateView.StateKey="Loading">
+                    <StackLayout 
+                                 IsVisible="{Binding Visitor}">
                         <controls:SkeletonView
                   BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor},
                                                     Dark={StaticResource DarkCardBackgroundColor}}"
                   CornerRadius="15"
                   HeightRequest="15"
                   HorizontalOptions="Start" />
-                        <StackLayout Orientation="Horizontal" Spacing="0">
+                    <StackLayout  Orientation="Horizontal" Spacing="0">
                             <views:HomeResultsLoadingView />
                             <views:HomeResultsLoadingView />
                             <views:HomeResultsLoadingView />
                         </StackLayout>
                     </StackLayout>
-                </toolkit:StateContainer.StateViews>
 
                 <Label Style="{StaticResource Body2FontSize_ExoRegular}" Text="{Binding LatestRace}" />
                     

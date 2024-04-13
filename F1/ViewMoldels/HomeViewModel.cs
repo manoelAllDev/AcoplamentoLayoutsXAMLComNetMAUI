@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Maui.Converters;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using F1.Models;
 using F1.Services.Ergast;
 using F1.ViewMoldels.Base;
@@ -12,13 +12,15 @@ using System.Threading.Tasks;
 
 namespace F1.ViewMoldels
 {
-    public class HomeViewModel : BaseViewModel
+    [ObservableObject]
+    public partial class HomeViewModel
     {
         #region Fields
 
         private readonly IErgastService _ergastService;
 
-        private RaceEventModel _latestRace;
+        [ObservableProperty]
+        private RaceEventModel _latestRaceObject;
 
         #endregion
 
@@ -26,13 +28,18 @@ namespace F1.ViewMoldels
 
         public Task Init { get; }
 
-        public string LatestRace { get; set; }
-        public ObservableCollection<RaceResultModel> LatestResults { get; set; }
+        [ObservableProperty]
+        public string latestRace;
+
+        [ObservableProperty]
+        public ObservableCollection<RaceResultModel> latestResults;
         public ObservableCollection<RaceEventModel> UpcomingRaceEventList { get; set; }
         public ObservableCollection<DriverStadingsModel> DriversList { get; set; }
         public ObservableCollection<ConstructorStadingsModel> TeamsList { get; set; }
 
-        private StateContainerViewModel State;
+        [ObservableProperty]
+        public bool visitor = false;
+   
 
         #endregion
 
@@ -55,8 +62,9 @@ namespace F1.ViewMoldels
         public HomeViewModel(
             IErgastService ergastService)
         {
-            Title = "Home";
+           
             _ergastService = ergastService;
+
 
 
             ProfileCommand = new Command(ProfileCommandHandler);
@@ -93,7 +101,7 @@ namespace F1.ViewMoldels
 
         private async void SeeMoreResultsCommandHandler()
         {
-            await Shell.Current.GoToAsync($"//main/schedule/details?round={_latestRace.Round}&selectedTab=1");
+            await Shell.Current.GoToAsync($"//main/schedule/details?round={_latestRaceObject.Round}&selectedTab=1");
         }
 
         private async void SeeEventCommandHandler(RaceEventModel raceEvent)
@@ -132,7 +140,7 @@ namespace F1.ViewMoldels
 
         private async Task Initialize()
         {
-            State.ChangeStateLoading();
+            Visitor = true;
             await GetResults();
             //await GetSchedule();
             //await GetDriverStadings();
@@ -142,20 +150,20 @@ namespace F1.ViewMoldels
         private async Task GetResults()
         {
             var res = await _ergastService.GetResults("current", "last", "results", "limit=10");
-            _latestRace = res.First();
+            _latestRaceObject = res.First();
             LatestRace = $"Round {res.First().Round} - {res.First().Circuit.Location.Country} ({res.First().Circuit.CircuitName})";
             LatestResults = new ObservableCollection<RaceResultModel>(res.First().Results)
             {
                 new RaceResultModel()
             };
 
-            State.ChangeStateSuccess();
+           Visitor = false;
         }
 
         private async Task GetSchedule()
         {
             var res = await _ergastService.GetSchedule("current");
-            _latestRace = res.PastRaceEvents.Last();
+            _latestRaceObject = res.PastRaceEvents.Last();
             UpcomingRaceEventList = new ObservableCollection<RaceEventModel>(res.UpcomingRaceEvents.Take(3))
             {
                 new RaceEventModel()

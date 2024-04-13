@@ -1,5 +1,8 @@
-﻿namespace F1.Models
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace F1.Models
 {
+    [ObservableObject]
     public record RaceResultModel
     {
         public int Number { get; set; }

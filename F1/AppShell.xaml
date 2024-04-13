@@ -27,7 +27,7 @@
     </Shell.Resources>
 
     <ShellItem Route="welcome">
-        <ShellContent ContentTemplate="{DataTemplate views:WelcomePage}" />
+        <ShellContent ContentTemplate="{DataTemplate tabViews:HomeView}" />
     </ShellItem>
     <TabBar Route="main">
         <Tab

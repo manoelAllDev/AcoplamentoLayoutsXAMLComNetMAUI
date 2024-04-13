@@ -8,21 +8,35 @@ using System.Threading.Tasks;
 
 namespace F1.Views.Controls
 {
-    [ObservableObject]
+    [INotifyPropertyChanged]
     public partial class StateContainerViewModel
     {
 
         [ObservableProperty]
         string currentState = States.Loading;
 
+        [ObservableProperty]
+        bool visible = true;
+
+
         public void ChangeStateSuccess()
         {
-            CurrentState = States.Success;
+            Visible = false;
         }
 
         public void ChangeStateLoading()
         {
             CurrentState = States.Loading;
+        }
+
+        public void ChangeStateVisibileOn()
+        {
+            Visible = true;
+        }
+
+        public void ChangeStateVisibileOff()
+        {
+            Visible = false;
         }
     }
 

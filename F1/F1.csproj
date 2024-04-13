@@ -58,6 +58,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Exo-Black.ttf" />
+	  <None Remove="Resources\Fonts\Exo-Bold.ttf" />
+	  <None Remove="Resources\Fonts\Exo-Medium.ttf" />
+	  <None Remove="Resources\Fonts\Exo-Regular.ttf" />
+	  <None Remove="Resources\Fonts\FontAwesome-Regular.ttf" />
+	  <None Remove="Resources\Fonts\FontAwesome-Solid.ttf" />
 	  <None Remove="Resources\Images\calendar.png" />
 	  <None Remove="Resources\Images\driver.png" />
 	  <None Remove="Resources\Images\history.png" />
