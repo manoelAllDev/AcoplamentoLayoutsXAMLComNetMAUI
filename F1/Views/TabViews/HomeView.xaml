@@ -4,28 +4,13 @@
              x:Class="F1.Views.TabView.HomeView"
              xmlns:templateSelector="clr-namespace:F1.Helpers.TemplateSelectors"
              xmlns:views="clr-namespace:F1.Views"
+             xmlns:controls="clr-namespace:F1.Views.Controls"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="HomeView">
-
-    <VerticalStackLayout 
-        toolkit:StateContainer.CurrentState="{Binding CurrentState}"
-        toolkit:StateContainer.CanStateChange="{Binding CanStateChange}">
-
-        <toolkit:StateContainer.StateViews>
-            <VerticalStackLayout toolkit:StateView.StateKey="Loading">
-                <ActivityIndicator IsRunning="True" />
-                <Label Text="Loading Content..." />
-            </VerticalStackLayout>
-            <Label toolkit:StateView.StateKey="Success" Text="Success!" />
-        </toolkit:StateContainer.StateViews>
-
-        <Label Text="Default Content" />
-        <Button Text="Change State" Command="{Binding ChangeStateCommand}" />
-
-    </VerticalStackLayout>
+             NavigationPage.HasNavigationBar="False">
 
 
-    <!--ContentPage.Resources>
+
+    <ContentPage.Resources>
         <ResourceDictionary>
             <templateSelector:HomeResultsTemplateSelector x:Key="HomeResultsTemplateSelector" />
             <templateSelector:HomeScheduleTemplateSelector x:Key="HomeScheduleTemplateSelector" />
@@ -72,151 +57,38 @@
                 Style="{StaticResource Body1FontSize_ExoBold}"
                 Text="Latest results" />
             <StackLayout
+               toolkit:StateContainer.CurrentState="{Binding CurrentState}"
                 Margin="20,0,0,0"
-                xct:StateLayout.AnimateStateChanges="False"
-                xct:StateLayout.CurrentState="{Binding ResultsState}"
                 HeightRequest="150">
-                <xct:StateLayout.StateViews>
-                    <xct:StateView RepeatCount="1" StateKey="Loading">
-                        <xct:StateView.Template>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <controls:SkeletonView
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor},
-                                                                          Dark={StaticResource DarkCardBackgroundColor}}"
-                                        CornerRadius="15"
-                                        HeightRequest="15"
-                                        HorizontalOptions="Start" />
-                                    <StackLayout Orientation="Horizontal" Spacing="0">
-                                        <views:HomeResultsLoadingView />
-                                        <views:HomeResultsLoadingView />
-                                        <views:HomeResultsLoadingView />
-                                    </StackLayout>
-                                </StackLayout>
-                            </DataTemplate>
-                        </xct:StateView.Template>
-                    </xct:StateView>
-                    <xct:StateView StateKey="Error" VerticalOptions="FillAndExpand">
-                        <Label Text="Error" />
-                    </xct:StateView>
-                    <xct:StateView StateKey="Empty" VerticalOptions="FillAndExpand">
-                        <Label Text="Empty" />
-                    </xct:StateView>
-                </xct:StateLayout.StateViews>
+                
+                <toolkit:StateContainer.StateViews>
+
+                    <StackLayout toolkit:StateView.StateKey="Loading">
+                        <controls:SkeletonView
+                  BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor},
+                                                    Dark={StaticResource DarkCardBackgroundColor}}"
+                  CornerRadius="15"
+                  HeightRequest="15"
+                  HorizontalOptions="Start" />
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <views:HomeResultsLoadingView />
+                            <views:HomeResultsLoadingView />
+                            <views:HomeResultsLoadingView />
+                        </StackLayout>
+                    </StackLayout>
+                </toolkit:StateContainer.StateViews>
+
                 <Label Style="{StaticResource Body2FontSize_ExoRegular}" Text="{Binding LatestRace}" />
+                    
                 <CollectionView ItemTemplate="{StaticResource HomeResultsTemplateSelector}" ItemsSource="{Binding LatestResults}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                 </CollectionView>
-            </StackLayout>
-            <Label
-                Margin="20,0,20,0"
-                Style="{StaticResource Body1FontSize_ExoBold}"
-                Text="Next races" />
-            <StackLayout
-                Margin="20,0,0,0"
-                xct:StateLayout.AnimateStateChanges="False"
-                xct:StateLayout.CurrentState="{Binding ScheduleState}"
-                HeightRequest="90">
-                <xct:StateLayout.StateViews>
-                    <xct:StateView RepeatCount="1" StateKey="Loading">
-                        <xct:StateView.Template>
-                            <DataTemplate>
-                                <StackLayout Orientation="Horizontal" Spacing="0">
-                                    <views:HomeScheduleLoadingView />
-                                    <views:HomeScheduleLoadingView />
-                                    <views:HomeScheduleLoadingView />
-                                </StackLayout>
-                            </DataTemplate>
-                        </xct:StateView.Template>
-                    </xct:StateView>
-                    <xct:StateView StateKey="Error" VerticalOptions="FillAndExpand">
-                        <Label Text="Error" />
-                    </xct:StateView>
-                    <xct:StateView StateKey="Empty" VerticalOptions="FillAndExpand">
-                        <Label Text="Empty" />
-                    </xct:StateView>
-                </xct:StateLayout.StateViews>
-                <CollectionView ItemTemplate="{StaticResource HomeScheduleTemplateSelector}" ItemsSource="{Binding UpcomingRaceEventList}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="0" Orientation="Horizontal" />
-                    </CollectionView.ItemsLayout>
-                </CollectionView>
-            </StackLayout>
-            <Label
-                Margin="20,0,20,0"
-                Style="{StaticResource Body1FontSize_ExoBold}"
-                Text="Driver Stadings" />
-            <StackLayout xct:StateLayout.AnimateStateChanges="False" xct:StateLayout.CurrentState="{Binding DriverStadingsState}">
-                <xct:StateLayout.StateViews>
-                    <xct:StateView RepeatCount="3" StateKey="Loading">
-                        <xct:StateView.Template>
-                            <DataTemplate>
-                                <views:DriverStadingsLoadingView />
-                            </DataTemplate>
-                        </xct:StateView.Template>
-                    </xct:StateView>
-                    <xct:StateView StateKey="Error" VerticalOptions="FillAndExpand">
-                        <Label Text="Error" />
-                    </xct:StateView>
-                    <xct:StateView StateKey="Empty" VerticalOptions="FillAndExpand">
-                        <Label Text="Empty" />
-                    </xct:StateView>
-                </xct:StateLayout.StateViews>
-                <StackLayout x:Name="driversList" BindableLayout.ItemsSource="{Binding DriversList}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <views:DriverStadingsView />
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-                <Label
-                    Margin="30,0,20,0"
-                    Style="{StaticResource Link_ExoRegular}"
-                    Text="See full stadings">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SeeDriversCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </StackLayout>
-            <Label
-                Margin="20,0,20,0"
-                Style="{StaticResource Body1FontSize_ExoBold}"
-                Text="Team Stadings" />
-            <StackLayout xct:StateLayout.AnimateStateChanges="False" xct:StateLayout.CurrentState="{Binding TeamStadingsState}">
-                <xct:StateLayout.StateViews>
-                    <xct:StateView RepeatCount="3" StateKey="Loading">
-                        <xct:StateView.Template>
-                            <DataTemplate>
-                                <views:TeamStadingsLoadingView />
-                            </DataTemplate>
-                        </xct:StateView.Template>
-                    </xct:StateView>
-                    <xct:StateView StateKey="Error" VerticalOptions="FillAndExpand">
-                        <Label Text="Error" />
-                    </xct:StateView>
-                    <xct:StateView StateKey="Empty" VerticalOptions="FillAndExpand">
-                        <Label Text="Empty" />
-                    </xct:StateView>
-                </xct:StateLayout.StateViews>
-                <StackLayout x:Name="teamsList" BindableLayout.ItemsSource="{Binding TeamsList}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <views:TeamStadingsView />
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-                <Label
-                    Margin="30,0,20,10"
-                    Style="{StaticResource Link_ExoRegular}"
-                    Text="See full stadings">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SeeTeamsCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                    
+               
             </StackLayout>
         </StackLayout>
-    </ScrollView>-->
+    </ScrollView>
         
 </ContentPage>

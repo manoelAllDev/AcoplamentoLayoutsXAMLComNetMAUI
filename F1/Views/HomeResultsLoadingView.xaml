@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="F1.Views.HomeResultsLoadingView"
+             xmlns:controls="clr-namespace:F1.Views.Controls"
+             Padding="0,0,0,5">
+    <Frame
+     Margin="5,0"
+     Padding="0"
+     BackgroundColor="{AppThemeBinding Light={StaticResource LightCardBackgroundColor},
+                                       Dark={StaticResource DarkCardBackgroundColor}}"
+     CornerRadius="20"
+     HeightRequest="145">
+        <Grid
+         Margin="15,10"
+         ColumnDefinitions="Auto, Auto"
+         RowDefinitions="Auto, Auto, Auto, Auto"
+         RowSpacing="5">
+            <controls:SkeletonView
+             Grid.Row="0"
+             Grid.Column="0"
+             BackgroundColor="{StaticResource AccentColor}"
+             CornerRadius="10"
+             HeightRequest="40"
+             HorizontalOptions="Start"
+             WidthRequest="40" />
+            <controls:SkeletonView
+             Grid.Row="1"
+             Grid.Column="0"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor},
+                                               Dark={StaticResource DarkPageBackgroundColor}}"
+             CornerRadius="15"
+             HeightRequest="15"
+             HorizontalOptions="Start" />
+            <controls:SkeletonView
+             Grid.Row="2"
+             Grid.Column="0"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor},
+                                               Dark={StaticResource DarkPageBackgroundColor}}"
+             CornerRadius="15"
+             HeightRequest="15"
+             HorizontalOptions="Start" />
+            <controls:SkeletonView
+             Grid.Row="3"
+             Grid.Column="0"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor},
+                                               Dark={StaticResource DarkPageBackgroundColor}}"
+             CornerRadius="10"
+             HeightRequest="10"
+             HorizontalOptions="Start" />
+        </Grid>
+    </Frame>
+</StackLayout>

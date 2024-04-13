@@ -8,22 +8,24 @@ using System.Threading.Tasks;
 
 namespace F1.Views.Controls
 {
-    [INotifyPropertyChanged]
+    [ObservableObject]
     public partial class StateContainerViewModel
     {
-        [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(ChangeStateCommand))]
-        bool canStateChange;
 
         [ObservableProperty]
         string currentState = States.Loading;
 
-        [RelayCommand(CanExecute = nameof(CanStateChange))]
-        void ChangeState()
+        public void ChangeStateSuccess()
         {
             CurrentState = States.Success;
         }
+
+        public void ChangeStateLoading()
+        {
+            CurrentState = States.Loading;
+        }
     }
+
 
     static class States
     {
