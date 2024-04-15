@@ -3,9 +3,8 @@
 Acoplamento de Layouts no .NET MAUI com XAML.
 
 Bibliotecas
-Formulários Xamarin 5.0
-Fundamentos do Xamarin
-Xamarin CommunityToolkit (Popup, TabView, StateView, Conversores)
+Fundamentos do .NET MAUI
+.NET MAUI CommunityToolkit (Popup, TabView, StateView, Conversores)
 Fody
 Newtonsoft.Json
 Configurar
